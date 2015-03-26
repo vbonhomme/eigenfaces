@@ -1,0 +1,64 @@
+---
+title: "Vignette Title"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r, eval=FALSE}
+devtools::install_github("vbonhomme/eigenfaces", build_vignettes=TRUE)
+
+
+```
+
+```{r}
+
+library(eigenfaces)
+# we load the dataset 'pain'. Cheers to PICS.
+data(pain)
+# Let's see what it contains.
+pain
+dim(pain)
+class(pain)
+# Im sure you wanted to see faces instead.
+plot(pain) # angry face
+plot(pain, 81) # happy face
+
+
+#dimnames(pain)
+fac <- lf_structure(pain, names=c("ind", "expr"))
+head(fac)
+
+# if you use Momocs, and you should ;-), code below will look familiar
+pain.p <- PCA(pain, fac=fac)
+
+pain.p
+head(pain.p$fac)
+
+plot(pain.p)
+plot(pain.p, "expr") ; axis(1)
+plot(pain.p, "ind")
+
+boxplot(pain.p, "ind")
+
+scree_plot(pain.p)
+scree(pain.p)
+
+faces <- PCA2face(pain.p, pos = cbind(seq(-20, 20, 1), 0))
+faces
+plot(faces, 10)
+```
+
+```{r, eval=FALSE}
+
+
+for (i in 1:dim(faces)[3]){
+  plot(faces, i)
+  Sys.sleep(0.1)
+}
+
+```

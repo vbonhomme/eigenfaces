@@ -12,6 +12,8 @@
 #' @docType package
 #' @name Momocs
 #' @import Momocs
+#' @importMethodsFrom Momocs
+#' @importClassesFrom Momocs
 #' @importFrom jpeg readJPEG
 NULL
 
