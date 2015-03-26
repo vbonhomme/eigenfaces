@@ -1,0 +1,16 @@
+Package: eigenfaces
+Type: Package
+Title: eigenfaces using R
+Version: 0.1
+Date: 2015-04-26
+Author: Vincent Bonhomme
+Maintainer: Vincent Bonhomme <bonhomme.vincent@gmail.com>
+Description: Eigenfaces are mainly used for face recognition and face morphometrics, using dimensionality reduction via eigenvectors (principal component analysis) on a set of faces, coming as images. In many aspects, it is a plugin of the Momocs package: it both takes profits and extends it.
+License: GPL-2 | GPL-3
+Roxygen: list(wrap = FALSE)
+URL: http://www.vincentbonhomme.fr/eigenfaces
+BugReports: https://github.com/vbonhomme/eigenfaces
+Depends: R(>= 3.1)
+Imports: Momocs, jpeg
+Suggests: knitr
+VignetteBuilder: knitr
