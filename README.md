@@ -3,6 +3,6 @@
 
 Install with
 ```
-devtools::install_github("vbonhomme/Momocs", build_vignettes=TRUE)
-library(Momocs)
+devtools::install_github("vbonhomme/eigenfaces", build_vignettes=TRUE)
+library(eigenfaces)
 ```
