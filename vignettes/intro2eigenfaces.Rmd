@@ -16,7 +16,7 @@ devtools::install_github("vbonhomme/eigenfaces", build_vignettes=TRUE)
 ```
 
 ```{r}
-
+library(Momocs)
 library(eigenfaces)
 # we load the dataset 'pain'. Cheers to PICS.
 data(pain)
