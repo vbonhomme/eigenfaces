@@ -10,10 +10,8 @@
 #' To cite eigenfaces in publications: \code{citation('eigenfaces')}. (Paper in prep.)
 #'
 #' @docType package
-#' @name Momocs
+#' @name eigenfaces
 #' @import Momocs
-#' @importMethodsFrom Momocs
-#' @importClassesFrom Momocs
 #' @importFrom jpeg readJPEG
 NULL
 

@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "An introduction to eigenfaces"
+author: "Vincent Bonhomme"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -8,57 +8,101 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
+Welcome to this minimal vignette using a minimal version of eigenfaces. More will come.
 
+Images should appear quite ugly but run the code for nicer plots.
+
+Here we go. First of all, be sure to install the very last version of eigenfaces, and also of Momocs.
 ```{r, eval=FALSE}
 devtools::install_github("vbonhomme/eigenfaces", build_vignettes=TRUE)
-
-
+devtools::install_github("vbonhomme/Momocs", build_vignettes=TRUE)
 ```
 
+We load both of them
 ```{r}
 library(Momocs)
 library(eigenfaces)
-# we load the dataset 'pain'. Cheers to PICS.
+````
+
+We gonna use the dataset 'pain', cheers to [PICS](http://pics.psych.stir.ac.uk/) !
+```{r}
 data(pain)
 # Let's see what it contains.
 pain
-dim(pain)
 class(pain)
+```
+
+eigenfaces uses two classes : ```afaces``` and ```pfaces```. They are array of images and PCA objects, respectively.
+
+If you wann see faces rather than text, use plot:
+```{r}
 # Im sure you wanted to see faces instead.
-plot(pain) # angry face
+plot(pain) # angry face. equivalent to plot(faces, 1)
 plot(pain, 81) # happy face
+```
 
-
-#dimnames(pain)
+We can extract a ```data.frame``` from file names. See ```lf_structure``` in Momocs to get a description and a how-to. Here we can cal it to pain directly and it gonna use the ```dimnames(pain)[[3]]``` to create the data.frame.
+```{r}
 fac <- lf_structure(pain, names=c("ind", "expr"))
 head(fac)
+````
 
+Here we are. Now, let's calculate a PCA on it. We gonna use the ```PCA``` method from Momocs, that eigenfaces extends. We also pass it with ```fac````.
+
+```{r}
 # if you use Momocs, and you should ;-), code below will look familiar
 pain.p <- PCA(pain, fac=fac)
 
 pain.p
 head(pain.p$fac)
+```
 
+We can use Momocs plotters
+```{r}
 plot(pain.p)
-plot(pain.p, "expr") ; axis(1)
-plot(pain.p, "ind")
+plot(pain.p, "expr") ; axis(1) # we ploti the axis to get an idea of the range (see below)
+plot(pain.p, "ind", chull=TRUE, chull.lty=1)
+```
 
+And its boxplot/screeplot plotter:
+```{r}
 boxplot(pain.p, "ind")
-
 scree_plot(pain.p)
 scree(pain.p)
+````
 
-faces <- PCA2face(pain.p, pos = cbind(seq(-20, 20, 1), 0))
+Let's reconstruct faces now from the PCA object:
+```{r}
+faces <- PCA2face(pain.p, pos = cbind(seq(-20, 20, 1), 0)) # that's were axis(1) helps
+```
+
+We obtain a ```afaces``` object that we can plot.
+```{r}
 faces
+class(faces)
 plot(faces, 10)
 ```
 
+We can also explores variation along PC1. Try the following:
 ```{r, eval=FALSE}
-
-
 for (i in 1:dim(faces)[3]){
   plot(faces, i)
   Sys.sleep(0.1)
 }
-
 ```
+
+If you use the package animation, you can even save it as a gif:
+
+```{r, eval=FALSE}
+library(animation)
+saveGIF({
+for (i in 1:dim(faces)[3]){
+  plot(faces, i)
+}
+})
+```
+
+Check your working directory for a ```animation.gif```.
+
+More to come.
+
