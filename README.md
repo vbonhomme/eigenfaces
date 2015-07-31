@@ -1,5 +1,5 @@
 # eigenfaces in R
- Working - yet functional - version. Shall be released to CRAN soon.
+ Working - yet minimal - version. Shall be released to CRAN at some point.
 
 Install with:
 ```
